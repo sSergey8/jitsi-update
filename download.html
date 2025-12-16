@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Загрузка JitsiVideoChat</title>
+</head>
+<body>
+<p>Загрузка последней версии приложения...</p>
+
+<script>
+fetch('version.json', { cache: 'no-store' })
+    .then(response => response.json())
+    .then(data => {
+        if (data.apkUrl) {
+            window.location.href = data.apkUrl;
+        } else {
+            document.body.innerText = 'Ошибка: ссылка на APK не найдена';
+        }
+    })
+    .catch(() => {
+        document.body.innerText = 'Ошибка загрузки version.json';
+    });
+</script>
+</body>
+</html>
